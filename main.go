@@ -8,8 +8,6 @@ import (
     "strconv"
 )
 
-// Does it need to support negatives?
-// what is the min max constraint
 func main() {
     var input string
     fmt.Println("Please provide numeric argument:")
@@ -65,13 +63,13 @@ func NumberToCurrencyConverter(input float64) string {
         3   : "Billion",
     }
 
-    // maximum input constraint
+    // min/max input constraint
     m := 999_999_999_999.99
 
     // closure
     f := func(x float64) string{
-        // 0 < x < m
-        if x > m || x <= 0 {
+        // -m < x < m
+        if x > m {
             log.Fatalf("\x1b[;31;1mUnsupported amount: %v", x)
         }
 
@@ -128,6 +126,11 @@ func NumberToCurrencyConverter(input float64) string {
         }
 
         return formatter(dollars, cents)
+    }
+
+    // support minus
+    if input < 0 {
+        return "Minus " + f(math.Abs(input))
     }
 
     return f(input)

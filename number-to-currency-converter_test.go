@@ -48,5 +48,9 @@ func TestNumberToCurrencyConverter(t *testing.T) {
         if NumberToCurrencyConverter(k) != v {
             t.Fatalf("Received \x1b[;31m%s\x1b[;0m for %v, it should be \x1b[;32m%s\x1b[;0m\n", NumberToCurrencyConverter(k), k, v)
         }
+        // Negatives
+        if NumberToCurrencyConverter(-k) != "Minus " + v {
+            t.Fatalf("Received \x1b[;31m%s\x1b[;0m for %v, it should be \x1b[;32m%s\x1b[;0m\n", "Minus " + NumberToCurrencyConverter(k), k, v)
+        }
     }
 }
